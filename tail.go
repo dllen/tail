@@ -354,6 +354,8 @@ func (tail *Tail) waitForChanges() error {
 			if err := tail.reopen(); err != nil {
 				return err
 			}
+			//seek to end
+			tail.file.Seek(tail.Location.Offset, tail.Location.Whence)
 			tail.Logger.Printf("Successfully reopened %s", tail.Filename)
 			tail.openReader()
 			return nil
